@@ -1,25 +1,15 @@
+require("dotenv").config();
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Usa una variable de entorno
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 async function consultarTienda(preguntaUsuario) {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4", // Corregido el nombre del modelo
+      model: "ft:gpt-3.5-turbo-0125:seba-y-daro-org:hotelmodelseba:AhwE3v3M", // Tu modelo fine-tuned
       messages: [
-        {
-          role: "system",
-          content: `
-          color=cl
-          TOYSTORE:juguetería.Pproductos:
-            1.Oso de peluche,cl blanco/negro.
-            2.Tractor en miniatura,cl amarillo.
-            3.Ukelele,cl marron.
-            Horario lun/vie,8/17hs...
-            Sebastian/Dario:duenos tienda`,
-        },
         {
           role: "user",
           content: preguntaUsuario,
@@ -27,7 +17,6 @@ async function consultarTienda(preguntaUsuario) {
       ],
     });
 
-    // Imprime solo la respuesta una vez
     console.log("\nRespuesta de la tienda:");
     console.log(completion.choices[0].message.content);
   } catch (error) {
@@ -35,7 +24,5 @@ async function consultarTienda(preguntaUsuario) {
   }
 }
 
-// Ejecutar la función con una pregunta
-consultarTienda(
-  "Hola ,yo trabajo de 6 am a 6pm , en que horario puedo pasar ?? "
-);
+// Prueba el modelo
+consultarTienda("Hola, ¿qué horarios tienen de atención?");
