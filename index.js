@@ -25,4 +25,4 @@ async function consultarTienda(preguntaUsuario) {
 }
 
 // Prueba el modelo
-consultarTienda("Hola, ¿qué horarios tienen de atención?");
+consultarTienda("Hola, ¿que horario es el check in? ");
